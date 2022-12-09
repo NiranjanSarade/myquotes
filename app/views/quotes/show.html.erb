@@ -1,0 +1,13 @@
+<h1><%= @quote.category %></h1>
+
+<p><%= @quote.body %></p>
+
+<p><em>- <%= @quote.author %></em></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_quote_path(@quote) %></li>
+  <li><%= link_to "Destroy", quote_path(@quote), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>

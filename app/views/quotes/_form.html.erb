@@ -1,0 +1,26 @@
+<%= form_with model: quote do |form| %>
+  <div>
+    <%= form.label :author %><br>
+    <%= form.text_field :author %>
+    <% quote.errors.full_messages_for(:author).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %><br>
+    <% quote.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>    
+  </div>
+
+  <div>
+   <%= form.label :category %><br>
+   <%= form.select :category, ['Motivational', 'Friendship', 'Love', 'Success', 'Happiness', 'Life'], selected: 'Motivational' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

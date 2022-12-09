@@ -1,0 +1,35 @@
+<header>
+  <div class=topbar>
+    <% if user_signed_in? %> 
+     <div> Welcome <%= current_user.email %> </div> 
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+    <% else %>
+      <%= button_to "Sign in", new_user_session_path %> 
+    <% end %>
+  </div>
+
+  <h1>Welcome to My Quotes !</h1>
+</header>
+
+<section>
+  <%= form_tag quotes_path, :method => 'get' do %>
+    <%= label_tag(:search, "Select a Category to view related quotes") %>
+    <%= select_tag :search, options_for_select(['Motivational', 'Friendship', 'Love', 'Success', 'Happiness', 'Life']), {prompt:'select'} %>
+    <%= submit_tag("Search", :name => nil) %>
+  <% end %>
+
+  <h2> <%= params[:search] if params[:search] %> </h2>
+
+    <% @quotes.each do |quote| %>
+      <div style="background-color:<%= cycle("lightgray","white") %>">
+        <span style="background-color:<%= current_cycle %>">
+          <%= quote.body %>
+          <p><em>- <%= quote.author %> (<%= quote.category %>)</em></p>  
+        </span>
+      </div>
+      
+      
+    <% end %>
+</section>
+
+<%= link_to "New Quote", new_quote_path %>
